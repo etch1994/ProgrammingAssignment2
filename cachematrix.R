@@ -3,13 +3,22 @@
 
 ## Write a short comment describing this function
 
-makeCacheMatrix <- function(x = matrix()) {
 
+# this functio basically takes 3 arguments(x:the number of elements that you want as a user to be in the matrix, y:the number of rows, z:the number of columns)
+#Fun1
+makeCacheMatrix <- function(x,y,z){
+  matrix<-matrix(rnorm(x),y,z)
+  matrix
 }
+#Test
+c<-makeCacheMatrix(9,3,3)
+c
 
-
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+#this function simply takes one argument which is the matrix the you got generated in variable(makeCacheMatrix) and give you the inverse 
+#Fun2
+cacheSolve<-function(matrix){
+  inverse<- matrix^(-1)
+  inverse
 }
+#Test
+cacheSolve(c)
