@@ -1,24 +1,30 @@
-## Put comments here that give an overall description of what your
-## functions do
+#function creates a special "matrix" object that able to cache its inverse.
 
-## Write a short comment describing this function
-
-
-# this functio basically takes 3 arguments(x:the number of elements that you want as a user to be in the matrix, y:the number of rows, z:the number of columns)
-#Fun1
-makeCacheMatrix <- function(x,y,z){
-  matrix<-matrix(rnorm(x),y,z)
-  matrix
+makeCacheMatrix <- function(x = matrix()) {
+  inv <- NULL
+  set <- function(y){
+    x <<- y
+    inv <<- NULL
+  }
+  get <- function() x
+  setInverse <- function(solveM) inv <<- solveM
+  getInverse <- function() inv
+  list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
 }
-#Test
-c<-makeCacheMatrix(9,3,3)
-c
 
-#this function simply takes one argument which is the matrix the you got generated in variable(makeCacheMatrix) and give you the inverse 
-#Fun2
-cacheSolve<-function(matrix){
-  inverse<- matrix^(-1)
-  inverse
+
+
+
+
+## This function computes the inverse of the special "matrix" returned from above matrix
+cacheSolve <- function(x, ...) {
+  inv <- x$getInverse()
+  if(!is.null(inv)){
+    message("getting cached data")
+    return(inv)
+  }
+  data <- x$get()
+  inv <- solve(data)
+  x$setInverse(inv)
+  inv      
 }
-#Test
-cacheSolve(c)
